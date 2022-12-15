@@ -13,15 +13,6 @@ let HOST = process.env.HOST;
 let PORT = process.env.PORT;
 let DIALECT = process.env.DIALECT;
 
-if (process.env.NODE_ENV === 'test') {
-  DATABASE = process.env.DATABASE_TEST;
-  USERNAME = process.env.USERNAME_TEST;
-  PASSWORD = process.env.PASSWORD_TEST;
-  HOST = process.env.HOST_TEST;
-  PORT = process.env.PORT_TEST;
-  DIALECT = process.env.DIALECT_TEST;
-}
-
 const sequelize = new Sequelize(DATABASE, USERNAME, PASSWORD, {
   host: HOST,
   port: PORT,
