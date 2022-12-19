@@ -20,6 +20,26 @@ export const getAllUsers = async (req, res, next) => {
   }
 };
 
+export const loginUser = async (req, res, next) => {
+  try {
+    const data = await UserService.loginUser(req.body);
+    res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      data: data,
+      message: 'User login successfull'
+    });
+  } catch (error) {
+    res.status(HttpStatus.BAD_REQUEST).json({
+      code: HttpStatus.BAD_REQUEST,
+      message: `${error}`
+    });
+  }
+};
+
+
+
+
+
 /**
  * Controller to get a single user
  * @param  {object} req - request object
