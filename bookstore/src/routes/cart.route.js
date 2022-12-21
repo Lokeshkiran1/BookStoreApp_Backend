@@ -13,4 +13,7 @@ router.post('/addCart', userAuth ,cartController.addToCart);
 //router to increase the quantity and total price
 router.delete('/:id',userAuth, cartController.remove);
 
+//router to get cart total
+router.get('/cartTotal',userAuth,cartController.cartTotal)
+
 export default router;

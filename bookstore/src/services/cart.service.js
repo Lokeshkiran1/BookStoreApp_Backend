@@ -32,7 +32,7 @@ export const addToCart = async (body) => {
     }
   };
 
- //remove book by id
+ //remove book by id from cart
  export const remove = async (id) => {
     const data = await Cart.findOne({where:{productId:id}})
     const presentInStock=await Book.findOne({where:{productId:id}});
@@ -46,4 +46,16 @@ export const addToCart = async (body) => {
     }
     return "";
   };
+
+  //get cart total price
+export const cartTotal = async (userId) => {
+    //console.log("cart service=======>>>>",userId)
+    const data = await Cart.findAll({where:{userId:userId}});
+    var total=0;
+    for(var obj of data){
+        total=total+obj.price
+    }
+    return total;
+  };
+
   

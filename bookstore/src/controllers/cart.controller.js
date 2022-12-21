@@ -41,4 +41,18 @@ export const getAllBooks = async (req, res, next) => {
       next(error);
     }
   };
+
+  export const cartTotal = async (req, res, next) => {
+    try {
+      const data = await cartService.cartTotal(req.body.userId);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'cart total fetched successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   
