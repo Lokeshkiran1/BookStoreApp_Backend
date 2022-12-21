@@ -36,6 +36,7 @@ sequelize
 const db={};
 db.Sequelize=Sequelize;
 db.sequelize=sequelize;
+db.cart=require('../models/cart')(sequelize,DataTypes)
 db.book=require('../models/book')(sequelize,DataTypes)
 db.user=require('../models/user')(sequelize,DataTypes,Model)
 sequelize.sync();

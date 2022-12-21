@@ -1,5 +1,7 @@
 import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 /**
  * Middleware to authenticate if user has a valid Authorization token
@@ -19,9 +21,10 @@ export const userAuth = async (req, res, next) => {
       };
     bearerToken = bearerToken.split(' ')[1];
 
-    const { user } = await jwt.verify(bearerToken, 'your-secret-key');
-    res.locals.user = user;
-    res.locals.token = bearerToken;
+    const user = await jwt.verify(bearerToken, process.env.SECRET_KEY);
+    req.body.userId = user.email;
+    console.log("auth middleware=======>>>>",user.email);
+    //res.locals.token = bearerToken;
     next();
   } catch (error) {
     next(error);
