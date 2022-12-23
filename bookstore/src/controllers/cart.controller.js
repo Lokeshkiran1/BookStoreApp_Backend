@@ -18,7 +18,8 @@ export const getAllBooks = async (req, res, next) => {
 
   export const addToCart = async (req, res, next) => {
     try {
-      const data = await cartService.addToCart(req.body);
+      console.log("contr======",req.params.id)
+      const data = await cartService.addToCart(req.params.id,req.body);
       res.status(HttpStatus.CREATED).json({
         code: HttpStatus.CREATED,
         data: data,
@@ -31,7 +32,7 @@ export const getAllBooks = async (req, res, next) => {
 
   export const remove = async (req, res, next) => {
     try {
-      const data = await cartService.remove(req.params.id);
+      const data = await cartService.remove(req.params.id,req.body);
       res.status(HttpStatus.OK).json({
         code: HttpStatus.OK,
         data: data,

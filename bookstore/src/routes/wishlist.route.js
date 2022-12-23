@@ -8,6 +8,9 @@ const router = express.Router();
 router.get('', userAuth,wishlistController.getAllBooks);
 
 //route to add book to the wishlist
-router.post('/addWishlist', userAuth ,wishlistController.addToWishlist);
+router.post('/:id', userAuth ,wishlistController.addToWishlist);
+
+//route to remove book from wishlist 
+router.delete('/:id',userAuth,wishlistController.removeFromWishlist);
 
 export default router;

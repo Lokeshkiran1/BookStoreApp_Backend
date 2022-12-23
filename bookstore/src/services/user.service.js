@@ -6,11 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-//get all users
-export const getAllUsers = async () => {
-  const data = await User.findAll();
-  return data;
-};
+
 
 //create new user
 export const newUser = async (body) => {

@@ -18,11 +18,25 @@ export const getAllBooks = async (req, res, next) => {
 
   export const addToWishlist = async (req, res, next) => {
     try {
-      const data = await wishlistService.addToWishlist(req.body);
+      const data = await wishlistService.addToWishlist(req.params.id,req.body);
       res.status(HttpStatus.CREATED).json({
         code: HttpStatus.CREATED,
         data: data,
         message: 'Added to wishlist successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+  export const removeFromWishlist = async (req, res, next) => {
+    try {
+      const data = await wishlistService.removeFromWishlist(req.params.id,req.body);
+      res.status(HttpStatus.CREATED).json({
+        code: HttpStatus.CREATED,
+        data: data,
+        message: 'removed item from wishlist successfully'
       });
     } catch (error) {
       next(error);

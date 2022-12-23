@@ -13,20 +13,29 @@ export const getAllBooks = async (userId) => {
 
 
    //Add to wishlist
-export const addToWishlist = async (body) => {
+export const addToWishlist = async (id,body) => {
     console.log(body)
-    const presentInStock=await Book.findOne({where:{bookName:body.bookName}});
-    if(presentInStock!==null){
-        const presentInWishlist=await Wishlist.findOne({where:{bookName:body.bookName,userId:body.userId}});
-        //console.log("===========>>>>>>>",presentInCart)
+    const presentInStock=await Book.findOne({where:{id:id}});
+        const presentInWishlist=await Wishlist.findOne({where:{productId:presentInStock.productId,userId:body.userId}});
         if(presentInWishlist===null){
-            const data = await Wishlist.create(body);
+            const data = await Wishlist.create({
+              userId:body.userId,
+              bookName:presentInStock.bookName,
+              description:presentInStock.description,
+              productId:presentInStock.productId
+            });
             return data;
         }
         else{
                 throw new Error("already in wishlist")
             }
-    }else{
-      throw new Error("out of stock");
-    }
   };
+
+  export const removeFromWishlist=async(id,body)=>{
+    const data=await Wishlist.destroy({where:{id:id,userId:body.userId}});
+    if(data!==null){
+      return data;
+    }else{
+      throw new Error('product is not in wishlist to delete')
+    }
+  }

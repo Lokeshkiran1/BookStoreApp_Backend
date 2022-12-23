@@ -7,10 +7,10 @@ const router = express.Router();
 //route to get all books in the cart
 router.get('', userAuth,cartController.getAllBooks);
 
-//route to add book by id
-router.post('/addCart', userAuth ,cartController.addToCart);
+//route to add book to cart
+router.post('/:id', userAuth ,cartController.addToCart);
 
-//router to increase the quantity and total price
+//router to the decrease qty in cart or remove from cart
 router.delete('/:id',userAuth, cartController.remove);
 
 //router to get cart total
