@@ -56,4 +56,19 @@ export const getAllBooks = async (req, res, next) => {
     }
   };
 
+  export const purchase = async (req, res, next) => {
+    try {
+      console.log("contr======",req.params.id)
+      const data = await cartService.purchase(req.params.id,req.body);
+      res.status(HttpStatus.CREATED).json({
+        code: HttpStatus.CREATED,
+        data: data,
+        message: 'Added to purchase successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
   

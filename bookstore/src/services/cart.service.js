@@ -72,4 +72,10 @@ export const cartTotal = async (userId) => {
     return total;
   };
 
-  
+  //update purchase in the cart
+  export const purchase = async (id,body) => {
+            const data=await Cart.update({purchase:true},{
+                where:{id:id,userId:body.userId}
+            })
+            return data;
+        }
